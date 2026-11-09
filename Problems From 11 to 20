@@ -1,0 +1,280 @@
+#include <iostream>;
+using namespace std;
+
+
+// Problem #11 : Write a program to ask the user to enter three marks : Mark1, Mark2 and Mark3. Then print the AVERAGE of entered marks, and print "PASS" if the average >= 50, otherwise print "FAIL".
+// Problem #12 : Write a program to ask the user to enter two number : Number1 and Number2. Then print the MAX number.
+// Problem #13 : Write a program to ask the user to enter two number : Number1, Nmuber2 and Number3. Then print the MAX number.
+// Problem #14 : Write a program to ask the user to enter two number : Number1 and Number2. Then SWAP the two number and print it them.
+// Problem #15 : Write a program to calculate rectangle area and print the result on the screen. Area = a*b.
+// Problem #16 : Write a program to calculate rectangle area through diagonal and side area of rectangle and print the result on the screen. Area = a * sqr(d² - a²).
+// Problem #17 : Write a program to calculate triangle area and print the result on the screen. Area = 1/2 a * h.
+// Problem #18 : Write a program to calculate circle area and print the result on the screen. Area = 3,14 * r².
+// Problem #19 : Write a program to calculate circle area through diameter and print the result on the screen. Area = 3,14 * d²/4.
+// Problem #20 : Write a program to calculate circle area inscribed in a square and print the result on the screen. Area = 3,14 * a²/4.
+
+
+enum enMarkResult { Pass = 0, Fail = 1 };
+void ReadMarks(int& Mark1, int& Mark2, int& Mark3)
+{
+	cout << "Enter mark one : ";
+	cin >> Mark1;
+
+	cout << "Enter mark two : ";
+	cin >> Mark2;
+
+	cout << "Enter mark three : ";
+	cin >> Mark3;
+}
+int CalculateSumOfThreeMarks(int Mark1, int Mark2, int Mark3)
+{
+	return Mark1 + Mark2 + Mark3;
+}
+float CalculateAverageOfThreeMarks(int Mark1, int Mark2, int Mark3)
+{
+	return (float)CalculateSumOfThreeMarks(Mark1, Mark2, Mark3) / 3;
+}
+enMarkResult CheckMark(int Mark)
+{
+	if (Mark >= 50)
+		return enMarkResult::Pass;
+	else
+		return enMarkResult::Fail;
+}
+void PrintResultOfAverageThreeMarks(int Average)
+{
+	cout << "The average of three marks is : " << Average << endl;
+
+	if(CheckMark(Average) == enMarkResult::Pass)
+		cout << "You are Pass" << endl;
+	else
+		cout << "You are Fail" << endl;
+}
+
+void ReadNumbers(int& Number1, int& Number2)
+{
+	cout << "\nEnter number one : ";
+	cin >> Number1;
+
+	cout << "Enter number two : ";
+	cin >> Number2;
+}
+int MaxOfTwoNumber(int Number1, int Number2)
+{
+	if (Number1 > Number2)
+		return Number1;
+	else
+		return Number2;
+}
+void PrintResultOfMaxNumber(int MaxNumber)
+{
+	cout << "Maximum number is : " << MaxNumber << endl;
+}
+
+void ReadNumbers(int& Number1, int& Number2, int& Number3)
+{
+	cout << "\nEnter number one : ";
+	cin >> Number1;
+
+	cout << "Enter number two : ";
+	cin >> Number2;
+
+	cout << "Enter number three : ";
+	cin >> Number3;
+}
+int MaxOfThreeNumbers(int Number1, int Number2, int Number3)
+{
+	// My Solution :
+	/*if (Number1 > Number2 && Number1 > Number3)
+		return Number1;
+	else if (Number2 > Number3)
+		return Number2;
+	else
+		return Number3;*/
+
+	// Dr.Abu-hadhoud Solution :
+	if (Number1 > Number2)
+		if (Number1 > Number3)
+			return Number1;
+		else
+			return Number2;
+	else
+		if (Number2 > Number3)
+			return Number2;
+		else
+			return Number3;
+}
+
+void SwapNumbers(int& Number1, int& Number2)
+{
+	short TempNumber = 0;
+
+	TempNumber = Number1;
+
+	Number1 = Number2;
+	Number2 = TempNumber;
+}
+void PrintNumbers(int& Number1, int& Number2)
+{
+	cout << "Number one : " << Number1 << endl;
+	cout << "Number two : " << Number2 << endl;
+}
+
+void ReadMesures(float& A, float& B)
+{
+	cout << "\nPleas enter rectangle weigh A : ";
+	cin >> A;
+
+	cout << "Pleas enter rectangle  B : ";
+	cin >> B;
+}
+float CalculateRectangleArea(int a, int b)
+{
+	return (float)(a * b);
+}
+void PrintRectangleArea(float Area)
+{
+	cout << "Rectangle area : " << Area << endl;
+}
+
+float CalculateRectangleAreaBySideAndDiagonal(float a, float d)
+{
+	float Area = a * sqrt(pow(a, 2) - pow(d, 2));
+	return Area;
+}
+void PrintRectangleAreaBySideAndDiagonal(float Area)
+{
+	cout << "Rectangle area by side and diagonl : " << Area << endl;
+}
+
+void ReadTraingleArea(float& a, float& h)
+{
+	cout << "\nEnter traingle base a : ";
+	cin >> a;
+
+	cout << "Enter traingle height h : ";
+	cin >> h;
+}
+float CalculateTriangleArea(float a, float h)
+{
+	float Area = (a / 2) * h;
+	return Area;
+}
+void PrintTraingleArea(float Area)
+{
+	cout << "Traingle area : " << Area << endl;
+}
+
+float ReadRadious()
+{
+	float r;
+
+	cout << "\nPleas enter radious r : ";
+	cin >> r;
+
+	return r;
+}
+float CalculateCircleArea(float r)
+{
+	const float PI = 3.14159265;
+
+	float Area = PI * pow(r, 2);
+	return Area;
+}
+void PrintCircleArea(float Area)
+{
+	cout << "Circle area : " << Area << endl;
+}
+
+float ReadDiameter()
+{
+	float Diameter;
+
+	cout << "\nEnter diameter d : ";
+	cin >> Diameter;
+
+	return Diameter;
+}
+float CalculateCircleAreaThroughDiameter(int d)
+{
+	const float PI = 3.14159265358979;
+
+	float Area = (PI * pow(d, 2)) / 4;
+	return Area;
+}
+void PrintCircleAreaThroughDiameter(float Area)
+{
+	cout << "Circle area through diameter : " << Area << endl;
+}
+
+float ReadSquareSide()
+{
+	float SquareSide;
+
+	cout << "\nEnter square side : ";
+	cin >> SquareSide;
+
+	return SquareSide;
+}
+float CalculateCircleAreaInscribedInSquare(int a)
+{
+	const float PI = 3.14159265358979;
+
+	float Area = (PI * pow(a, 2)) / 4;
+	return Area;
+}
+void PrintCircleAreaInscribedInSquare(float Area)
+{
+	cout << "Circle area inscribed in square : " << Area << endl;
+}
+
+int main()
+{
+	// Problem #11 : Write a program to ask the user to enter three marks : Mark1, Mark2 and Mark3. Then print the AVERAGE of entered marks, and print "PASS" if the average >= 50, otherwise print "FAIL".
+	int Mark1, Mark2, Mark3;
+	ReadMarks(Mark1, Mark2, Mark3);
+	PrintResultOfAverageThreeMarks(CalculateAverageOfThreeMarks(Mark1, Mark2, Mark3));
+
+	// Problem #12 : Write a program to ask the user to enter two number : Number1 and Number2. Then print the MAX number.
+	int Number1, Number2;
+	ReadNumbers(Number1, Number2);
+	PrintResultOfMaxNumber(MaxOfTwoNumber(Number1, Number2));
+
+	// Problem #13 : Write a program to ask the user to enter two number : Number1, Nmuber2 and Number3. Then print the MAX number.
+	int number1, number2, number3;
+	ReadNumbers(number1, number2, number3);
+	PrintResultOfMaxNumber(MaxOfThreeNumbers(number1, number2, number3));
+
+	// Problem #14 : Write a program to ask the user to enter two number : Number1 and Number2. Then SWAP the two number and print it them.
+	int Num1, Num2;
+	ReadNumbers(Num1, Num2);
+	PrintNumbers(Num1, Num2);
+	SwapNumbers(Num1, Num2);
+	PrintNumbers(Num1, Num2);
+
+	// Problem #15 : Write a program to calculate rectangle area and print the result on the screen. Area = a*b.
+	float a, b;
+	ReadMesures(a, b);
+	PrintRectangleArea(CalculateRectangleArea(a, b));
+
+	// Problem #16 : Write a program to calculate rectangle area through diagonal and side area of rectangle and print the result on the screen. Area = a * sqr(d² - a²).
+	float d;
+	ReadMesures(a, d);
+	PrintRectangleAreaBySideAndDiagonal(CalculateRectangleAreaBySideAndDiagonal(a, b));
+
+	// Problem #17 : Write a program to calculate triangle area and print the result on the screen. Area = 1/2 a * h.
+	float h;
+	ReadTraingleArea(a, h);
+	PrintTraingleArea(CalculateCircleAreaThroughDiameter(d));
+    
+	// Problem #18 : Write a program to calculate circle area and print the result on the screen. Area = 3,14 * r².
+	PrintCircleArea(CalculateCircleArea(ReadRadious()));
+	
+	// Problem #19 : Write a program to calculate circle area through diameter and print the result on the screen. Area = 3,14 * d²/4.
+	PrintCircleAreaThroughDiameter(CalculateCircleAreaThroughDiameter(ReadDiameter()));
+
+	// Problem #20 : Write a program to calculate circle area inscribed in a square and print the result on the screen. Area = 3,14 * a²/4.
+	PrintCircleAreaInscribedInSquare(CalculateCircleAreaInscribedInSquare(ReadSquareSide()));
+
+	return 0;
+}
