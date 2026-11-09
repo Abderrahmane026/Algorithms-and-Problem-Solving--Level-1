@@ -1,0 +1,321 @@
+#include <iostream>;
+#include <string>;
+using namespace std;
+
+
+// Problem #31 : Write a program to ask the user to enter : Number, Then print the Number^2, Number^3 and Number^4. INPUTS : 3 | OUTPUTS : 9, 27 and 81.
+// Problem #32 : Write a program to ask the user to enter : Number, M, Then print the Number^M. INPUTS : 2, 4 | OUTPUTS : 16.
+// Problem #33 : Write a program to ask the user to enter : GRADE, Then print the grad as follows : 90 - 100 Print A | 80 - 89 Print B | 70 - 79 Print C | 60 - 69 Print D | 50 - 59 Print E | Otherwise Print F. INPUTS : 95 | OUPUTS : A.
+// Problem #34 : Write a program to ask the user to enter : TOTAL SALES, The commission is calculated as one percentage * the total sales amount, all you need is to decide which percentage to use of the following :
+// print the grad as follows : 1000.000 -> 1% | 500K to 1M -> 2% | 100k to 500K -> 3% | 50K to 100K -> 5% | Otherwise 0% . INPUTS : 110.000 | OUPUTS : 3.300.
+// Problem #35 : Write a program to ask the user to enter : PENNIES, NICKELS, DIMES, QUARTERS, DOLLARS. Then calculate the TOTAL PENNIES, TOTAL DOLLARS and print them on the screen. giving that :
+// PENNY = 1 | NICKEL = 5 | DIME = 10 | QUARTER = 25 | DOLLAR = 100. INPUTS : 5, 5, 5, 5, 5 | OUTPUTS : 705 PENNIES - 7,05 DOLLARS.
+// Problem #36 : Write a program to ask the user to enter : Number1, Number2, Operation Type. Then perform the calculation according to the operation type as follow  : '+' : add the two numbers | '-' : subtract the two numbers | '*' : multiply the two numbers | '/' : devide the two numbers. INPUTS : 10, 20, * | OUTPUTS : 200.
+// Problem #37 : Write a program to read numbers from user and SUM them, keep reading until the user enters -99 then print the SUM on the screen. INPUTS : 10, 20, 30, 40, -99 | OUTPUTS : 100.
+// Problem #38 : Write a program to read a number and check if it is a prime number or not. NOTE : Prime number can only divide on one and on itself. INPUTS : 5, 6, 3 | OUTPUTS : Prime, Not Prime, Prime.
+// Problem #39 : Write a program to read a TOTAL BILL and CASH PAID and calculate the remainder to be paid back. INPUTS : 20, 50 | OUTPUTS : 30.
+// Problem #40 : A restaurant charges 10% SERVICES FEE and 16% SALES TAX. Write a program to read a BILL VALUE and ADD SERVICE FEE  and SALES TAX to it, and print the TOTAL BILL on the screen. INPUT : 100 | OUTPUT : 127,6.	
+
+
+int ReadNumber()
+{
+	int N;
+
+	cout << "\nEnter number : ";
+	cin >> N;
+
+	return N;
+}
+void PowerOf2_3_4(int Number)
+{
+	cout << "Power of 2 : " << Number * Number << endl;
+	cout << "Power of 3 : " << Number * Number * Number << endl;
+	cout << "Power of 4 : " << Number * Number * Number * Number << endl;
+}
+
+int ReadPower()
+{
+	int Power;
+
+	cout << "Enter power : ";
+	cin >> Power;
+
+	return Power;
+}
+int PowerOfM(int M, int Number)
+{
+	// Any number powered to zero gives 1.
+	if (M == 0)
+		return 1;
+
+	int Power = 1;
+
+	for (int i = 1; i <= M; i++)
+	{
+		Power = Power * Number;
+	}
+
+	return Power;
+}
+
+int ReadGradeInRange(short From, short To)
+{
+	int Grade;
+
+	do
+	{
+		cout << "\nEnter your grade from 0 to 100 : ";
+		cin >> Grade;
+
+	} while (Grade <= From && Grade >= To);
+
+	return Grade;
+}
+void PrintResultOfGrade(int Grade)
+{
+	if (Grade >= 90 && Grade <= 100)
+		cout << "Your Grade is : A" << endl;
+	else if(Grade >= 80 && Grade <= 99)
+		cout << "Your Grade is : B" << endl;
+	else if (Grade >= 70 && Grade <= 79)
+		cout << "Your Grade is : C" << endl;
+	else if (Grade >= 60 && Grade <= 69)
+		cout << "Your Grade is : D" << endl;
+	else if (Grade >= 50 && Grade <= 59)
+		cout << "Your Grade is : E" << endl;
+	else
+		cout << "Your Grade is : F" << endl;
+}
+
+int ReadTotalSales()
+{
+	int TotalSales;
+
+	cout << "\nEnter total sales : "; 
+	cin >> TotalSales;
+
+	return TotalSales;
+}
+float GetCommissionPercentage(int TotalSales)
+{
+	if (TotalSales >= 1000000)
+		return 0.01;
+	else if (TotalSales >= 500000)
+		return 0.02;
+	else if (TotalSales >= 100000)
+		return 0.03;
+	else if (TotalSales >= 50000)
+		return 0.05;
+	else
+		return 0.00;
+}
+float CalculateTotalCommission(float TotalSales)
+{
+	return GetCommissionPercentage(TotalSales) * TotalSales;
+}
+
+struct stPiggyBankContenet
+{
+	int Pennies, Nickels, Dimes, Quarters, Dollars;
+};
+stPiggyBankContenet ReadPiggyBankContenet()
+{
+	stPiggyBankContenet PiggyBankContenet;
+
+	cout << "\nEnter pennies : ";
+	cin >> PiggyBankContenet.Pennies;
+
+	cout << "Enter nickels : ";
+	cin >> PiggyBankContenet.Nickels;
+
+	cout << "Enter dimes : ";
+	cin >> PiggyBankContenet.Dimes;
+
+	cout << "Enter quarters : ";
+	cin >> PiggyBankContenet.Quarters;
+
+	cout << "Enter dollars : ";
+	cin >> PiggyBankContenet.Dollars;
+
+	return PiggyBankContenet;
+}
+int CalculateTotalPennies(stPiggyBankContenet PiggyBankContenet)
+{
+	int TotalPennies = (PiggyBankContenet.Pennies * 1) + (PiggyBankContenet.Nickels * 5) + (PiggyBankContenet.Dimes * 10) + (PiggyBankContenet.Quarters * 25) + (PiggyBankContenet.Dollars * 100);
+	return TotalPennies;
+}
+
+enum enOperationType
+{
+	Add = '+', Subtract = '-', Multiply = '*', Divide = '/'
+};
+float ReadNumber(string Message)
+{
+	float Number = 0;
+
+	cout << Message;
+	cin >> Number;
+
+	return Number;
+}
+enOperationType ReadOperationType()
+{
+	char OperationType = '+';
+
+	cout << "Enter operation type (+, -, *, /) : ";
+	cin >> OperationType;
+
+	return (enOperationType)OperationType;
+}
+float Calculation(float Number1, float Number2, enOperationType Operation)
+{
+	switch (Operation)
+	{
+		case enOperationType::Add:
+			return float(Number1 + Number2);
+		case enOperationType::Subtract:
+			return float(Number1 - Number2);
+		case enOperationType::Multiply:
+			return float(Number1 * Number2);
+		case enOperationType::Divide:
+			return float(Number1 / Number2);
+		default:
+			return Number1 + Number2;
+	}
+}
+void PrintCalculationResult(float Result)
+{
+	cout << "Result : " << Result << endl;
+}
+
+int SumNumbers()
+{
+	int Number, Counter = 1, sum = 0;
+
+	do
+	{
+		Number = ReadNumber("\nEnter number " + to_string(Counter) + " : ");
+
+		if (Number == -99)
+			break;
+
+		sum += Number;
+		Counter++;
+
+	} while (Number != -99);
+	return sum;
+}
+void PrintSumAllNumberUntil99(int Sum)
+{
+	cout << "Result : " << Sum << endl;
+}
+
+enum enPrimeNotPrime
+{
+	Prime = 0, NotPrime = 1
+};
+enPrimeNotPrime CheckPrimeNumber(int Number)
+{
+	int M = round(Number / 2);
+
+	for (int counter = 2; counter <= M; counter++)
+	{
+		if (Number % counter == 0)
+			return enPrimeNotPrime::NotPrime;
+	}
+	return enPrimeNotPrime::Prime;
+}
+float ReadPositiveNumber(string Message)
+{
+	float Number;
+
+	do
+	{
+		cout << Message;
+		cin >> Number;
+
+	} while (Number < 0);
+
+	return Number;
+}
+void PrintNumberType(int Number)	
+{
+	switch (CheckPrimeNumber(Number))
+	{
+	case enPrimeNotPrime::Prime:
+		cout << "Prime number!" << endl;
+		break;
+	case enPrimeNotPrime::NotPrime:
+		cout << "Not prime number!" << endl;
+		break;
+	}
+}
+
+float CalculateRemainder(float TotalBill, float CashPaid)
+{
+	float Remainder = CashPaid - TotalBill;
+	return Remainder;
+}
+
+float TotalBillAfterServiceAndTax(float TotalBill)
+{
+	TotalBill = TotalBill * 1.1;
+	TotalBill = TotalBill * 1.16;
+
+	return TotalBill;
+}
+
+int main()
+{
+	// Problem #31 : Write a program to ask the user to enter : Number, Then print the Number^2, Number^3 and Number^4. INPUTS : 3 | OUTPUTS : 9, 27 and 81.
+	PowerOf2_3_4(ReadNumber());
+
+  // Problem #32 : Write a program to ask the user to enter : Number, M, Then print the Number^M. INPUTS : 2, 4 | OUTPUTS : 16.
+	int Number = ReadNumber();
+	int M = ReadPower();
+	cout << "Result : " << PowerOfM(M, Number) << endl;
+
+  // Problem #33 : Write a program to ask the user to enter : GRADE, Then print the grad as follows : 90 - 100 Print A | 80 - 89 Print B | 70 - 79 Print C | 60 - 69 Print D | 50 - 59 Print E | Otherwise Print F. INPUTS : 95 | OUPUTS : A.
+	PrintResultOfGrade(ReadGradeInRange(50, 100));
+
+  // Problem #34 : Write a program to ask the user to enter : TOTAL SALES, The commission is calculated as one percentage * the total sales amount, all you need is to decide which percentage to use of the following :
+	// print the grad as follows : 1000.000 -> 1% | 500K to 1M -> 2% | 100k to 500K -> 3% | 50K to 100K -> 5% | Otherwise 0% . INPUTS : 110.000 | OUPUTS : 3.300.
+	float TotalSales = ReadTotalSales();
+	cout << "Commission percentage : " << GetCommissionPercentage(TotalSales) << endl;
+	cout << "Total commission : " << CalculateTotalCommission(TotalSales) << endl;
+
+  // Problem #35 : Write a program to ask the user to enter : PENNIES, NICKELS, DIMES, QUARTERS, DOLLARS. Then calculate the TOTAL PENNIES, TOTAL DOLLARS and print them on the screen. giving that :
+	// PENNY = 1 | NICKEL = 5 | DIME = 10 | QUARTER = 25 | DOLLAR = 100. INPUTS : 5, 5, 5, 5, 5 | OUTPUTS : 705 PENNIES - 7,05 DOLLARS.
+	float TotalPennies = CalculateTotalPennies(ReadPiggyBankContenet());
+	cout << "Total pennies : " << TotalPennies << endl;
+	cout << "Total dollars : " << TotalPennies / 100 << endl;
+	
+	// Problem #36 : Write a program to ask the user to enter : Number1, Number2, Operation Type. Then perform the calculation according to the operation type as follow  : '+' : add the two numbers | '-' : subtract the two numbers | '*' : multiply the two numbers | '/' : devide the two numbers. INPUTS : 10, 20, * | OUTPUTS : 200.
+	float Number1 = ReadNumber("\nEnter number one : ");
+	float Number2 = ReadNumber("Enter number two : ");
+	enOperationType OperationType = ReadOperationType();
+	PrintCalculationResult(Calculation(Number1, Number2, OperationType));
+	
+	// Problem #37 : Write a program to read numbers from user and SUM them, keep reading until the user enters -99 then print the SUM on the screen. INPUTS : 10, 20, 30, 40, -99 | OUTPUTS : 100.
+	PrintSumAllNumberUntil99(SumNumbers());
+
+  // Problem #38 : Write a program to read a number and check if it is a prime number or not. NOTE : Prime number can only divide on one and on itself. INPUTS : 5, 6, 3 | OUTPUTS : Prime, Not Prime, Prime.
+	PrintNumberType(ReadPositiveNumber("\nPleas enter positive number : "));
+
+  // Problem #39 : Write a program to read a TOTAL BILL and CASH PAID and calculate the remainder to be paid back. INPUTS : 20, 50 | OUTPUTS : 30.
+	float TotalBill = ReadPositiveNumber("\nEnter total bill : ");
+	float CashPaid = ReadPositiveNumber("Enter cash paid : ");
+
+	cout << "Total bill : " << TotalBill << endl;
+	cout << "Cash paid : " << CashPaid << endl;
+	cout << "\n*****************************\n";
+	cout << "Remainder : " << CalculateRemainder(TotalBill, CashPaid) << endl;
+
+  // Problem #40 : A restaurant charges 10% SERVICES FEE and 16% SALES TAX. Write a program to read a BILL VALUE and ADD SERVICE FEE  and SALES TAX to it, and print the TOTAL BILL on the screen. INPUT : 100 | OUTPUT : 127,6.
+	TotalBill = ReadPositiveNumber("\nEnter bill value : ");
+
+	cout << "Total bill : " << TotalBill << endl;	
+	cout << "Total bill after adding services fee and sales tax : " << TotalBillAfterServiceAndTax(TotalBill) << endl;
+
+	return 0;
+}
