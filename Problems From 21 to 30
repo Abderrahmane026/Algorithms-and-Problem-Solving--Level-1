@@ -1,0 +1,369 @@
+#include <iostream>;
+using namespace std;
+
+
+// Problem #21 : Write a program to calculate circle area along the circumference and print the result on the screen. Area = l²/4 * 3,14.
+// Problem #22 : Write a program to calculate circle area inscribed in an isosceles triangle the circumference and print the result on the screen. Area = 3,14 * b²/4 * (2 * a - b / 2 * a + b).
+// Problem #23 : Write a program to calculate circle area described around an arbitrary triangle and print the result on the screen. Area = 3,14 * ( (a * b * c) / 4 * sqrt (p * (p-a) * (p-b) * (p-c) )² | p = (a + b + c) / 2.
+// Problem #24 : Write a program to ask the user to enter : Age and check if the age is BETWEEN 18 & 45 then print "VALID AGE", otherwise print "INVALID AGE".
+// Problem #25 : Write a program to ask the user to enter : Age and check if the age is BETWEEN 18 & 45 then print "VALID AGE", otherwise print "INVALID AGE". NOTE : you should keep asking the user to enter a valid age until she/he enters it.
+// Problem #26 : Write a program to print numbers from 1 to N. INPUT : 10 | OUTPUTS : 1 2 3 ... 10.
+// Problem #27 : Write a program to print numbers from N to 1. INPUT : 10 | OUTPUTS : 10 ... 3 2 1.
+// Problem #28 : Write a program to SUM ODD numbers from 1 to N. INPUT : 10 | OUTPUTS : 25.
+// Problem #29 : Write a program to SUM EVEN numbers from 1 to N. INPUT : 10 | OUTPUTS : 30.
+// Problem #30 : Write a program to calculate FACTORIAL of N. Example FACTORIAL of 6 : 6 * 5 * 4 * 3 * 2 * 1 = 720.
+// NOTE : user should only enter positive number, otherwise reject it and ask to enter positive number again. INPUT : 6 | OUTPUTS : 720.
+
+
+float ReadCircumference()
+{
+	float Circumference;
+
+	cout << "Enter circumference l : ";
+	cin >> Circumference;
+
+	return Circumference;
+}
+float CalculateCircleAreaByCircumference(float l)
+{
+	const float PI = 3.14159265358979;
+
+	float Area = (pow(l, 2) * PI) / 4;
+
+	return Area;
+}
+void PrintCircumferenceArea(float Area)
+{
+	cout << "Circle area by circumference : " << Area << endl;
+}
+
+void ReadTriangleData(float& a, float& b)
+{
+	cout << "\nEnter triangle side a : ";
+	cin >> a;
+
+	cout << "Enter triangle base b : ";
+	cin >> b;
+}
+float CalculateCircleAreaByTriangle(float a, float b)
+{
+	const float PI = 3.14159265358979;
+	float Area = Area = PI * (pow(b, 2) / 4) * ((2 * a - b) / (2 * a + b));
+	return Area;
+}
+void PrintCircleAreaByTriangle(float Area)
+{
+	cout << "Circle area inscribed in an isosceles triangle by circumference : " << Area << endl;
+}
+
+void ReadTriangleData(float& a, float& b, float& c)
+{
+	cout << "\nEnter triangle side a : ";
+	cin >> a;
+
+	cout << "Enter triangle base b : ";
+	cin >> b;
+
+	cout << "Enter triangle side c : ";
+	cin >> c;
+}
+float CalculateCircleAreaByTriangle(float a, float b, float c)
+{
+	const float PI = 3.14159265358979;
+
+	float P = (a + b + c) / 2;
+	float T = (a * b * c) / (4 * sqrt(P * (P - a) * (P - b) * (P - c)));
+
+	float Area = Area = PI * pow(T, 2);
+	return Area;
+}
+
+short ReadAge()
+{
+	short Age;
+	
+	cout << "\nEnter your age : ";
+	cin >> Age;
+
+	return Age;
+}
+bool ValidateNumberInRange(short Age, short From, short To)
+{
+	return (Age >= From && Age <= To);
+}
+void PrintResult(short Age)
+{
+	if (ValidateNumberInRange(Age, 18, 45))
+		cout << Age << " is a valid age" << endl;
+	else
+		cout << Age << " is invalid age" << endl;
+}
+
+short ReadUntilAgeBetween(short From, short To)
+{
+	short Age = 0;
+
+	do
+	{
+		Age = ReadAge();
+	} while (!ValidateNumberInRange(Age, From, To));
+
+	return Age;
+}
+
+int ReadNumber()
+{
+	int N;
+
+	cout << "\nEnter number : ";
+	cin >> N;
+
+	return N;
+}
+void PrintNumberFrom1ToN_UsingWhile(int N)
+{
+	int counter = 1;
+
+	cout << "Range printed using while statment : \n";
+
+	while (counter <= N)
+	{
+		cout << counter << endl;
+		counter++;
+	}
+}
+void PrintNumberFrom1ToN_UsingDoWhile(int N)
+{
+	int counter = 1;
+
+	cout << "Range printed using do while statment : \n";
+
+	do
+	{
+		cout << counter << endl;
+		counter++;
+
+	} while (counter <= N);
+}
+void PrintNumberFrom1ToN_UsingFor(int N)
+{
+	cout << "Range printed using for statment : \n";
+
+	for (int counter = 1; counter <= N; counter++)
+		cout << counter << endl;
+}
+
+void PrintNumberFromNTo1_UsingWhile(int N)
+{
+	int counter = N;
+
+	cout << "Range printed using while statment : \n";
+
+	while (counter >= 1)
+	{
+		cout << counter << endl;
+		counter--;
+	}
+}
+void PrintNumberFromNTo1_UsingDoWhile(int N)
+{
+	int counter = N;
+
+	cout << "Range printed using do while statment : \n";
+
+	do
+	{
+		cout << counter << endl;
+		counter--;
+
+	} while (counter >= 1);
+}
+void PrintNumberFromNTo1_UsingFor(int N)
+{
+	cout << "Range printed using for statment : \n";
+
+	for (int counter = N; counter >= 1; counter--)
+		cout << counter << endl;
+}
+
+enum enNumberType { Odd = 0, Even = 1 };
+enNumberType CheckNumberIfOddOrEven(int Number)
+{
+	if (Number % 2 == 0)
+		return enNumberType::Even;
+	else
+		return enNumberType::Odd;
+}
+
+int SumOddNumberFrom1ToN_UsingWhile(int N)
+{
+	int counter = 1;
+	int Sum = 0;
+
+	cout << "Sum odd numbers using while statment : \n";
+
+	while (counter <= N)
+	{
+		if (CheckNumberIfOddOrEven(counter) == enNumberType::Odd)
+			Sum += counter;
+		counter++;
+	}
+
+	return Sum;
+}
+int SumOddNumberFrom1ToN_UsingDoWhile(int N)
+{
+	int counter = 1;
+	int Sum = 0;
+
+	cout << "Sum odd numbers using do while statment : \n";
+
+	do
+	{
+		if (CheckNumberIfOddOrEven(counter) == enNumberType::Odd)
+			Sum += counter;
+		counter++;
+	} while (counter <= N);
+
+	return Sum;
+}
+int SumOddNumberFrom1ToN_UsingFor(int N)
+{
+	int Sum = 0;
+
+	cout << "Sum odd numbers using for statment : \n";
+
+	for (int counter = 1; counter <= N; counter++)
+	{
+		if (CheckNumberIfOddOrEven(counter) == enNumberType::Odd)
+			Sum += counter;
+	}
+
+	return Sum;
+}
+
+int SumEvenNumberFrom1ToN_UsingWhile(int N)
+{
+	int counter = 1;
+	int Sum = 0;
+
+	cout << "Sum even numbers using while statment : \n";
+
+	while (counter <= N)
+	{
+		if (CheckNumberIfOddOrEven(counter) == enNumberType::Even)
+			Sum += counter;
+		counter++;
+	}
+
+	return Sum;
+}
+int SumEvenNumberFrom1ToN_UsingDoWhile(int N)
+{
+	int counter = 1;
+	int Sum = 0;
+
+	cout << "Sum even numbers using do while statment : \n";
+
+	do
+	{
+		if (CheckNumberIfOddOrEven(counter) == enNumberType::Even)
+			Sum += counter;
+		counter++;
+	} while (counter <= N);
+
+	return Sum;
+}
+int SumEvenNumberFrom1ToN_UsingFor(int N)
+{
+	int Sum = 0;
+
+	cout << "Sum even numbers using for statment : \n";
+
+	for (int counter = 1; counter <= N; counter++)
+	{
+		if (CheckNumberIfOddOrEven(counter) == enNumberType::Even)
+			Sum += counter;
+	}
+
+	return Sum;
+}
+
+int ReadPositiveNumber(string Message)
+{
+	int Number;
+
+	do
+	{
+		cout << Message << endl;
+		cin >> Number;
+
+	} while (Number < 0);
+
+	return Number;
+}
+int FactorialOfN(int N)
+{
+	int factorial = 1;
+	int counter = N;
+
+	do
+	{
+		factorial = factorial * counter;
+		counter--;
+	} while (counter != 1);
+
+	return factorial;
+}
+
+int main()
+{
+	// Problem #21 : Write a program to calculate circle area along the circumference and print the result on the screen. Area = l²/4 * 3,14.
+	PrintCircumferenceArea(CalculateCircleAreaByCircumference(ReadCircumference()));
+
+	// Problem #22 : Write a program to calculate circle area inscribed in an isosceles triangle the circumference and print the result on the screen. Area = 3,14 * b²/4 * (2 * a - b / 2 * a + b).
+	float a, b;
+	ReadTriangleData(a, b);
+	PrintCircleAreaByTriangle(CalculateCircleAreaByTriangle(a, b));
+
+	// Problem #23 : Write a program to calculate circle area described around an arbitrary triangle and print the result on the screen. Area = 3,14 * ( (a * b * c) / 4 * sqrt (p * (p-a) * (p-b) * (p-c) )² | p = (a + b + c) / 2.
+	float c;
+	ReadTriangleData(a, b, c);
+	PrintCircleAreaByTriangle(CalculateCircleAreaByTriangle(a, b, c));
+
+	// Problem #24 : Write a program to ask the user to enter : Age and check if the age is BETWEEN 18 & 45 then print "VALID AGE", otherwise print "INVALID AGE".
+	PrintResult(ReadAge());
+
+	// Problem #25 : Write a program to ask the user to enter : Age and check if the age is BETWEEN 18 & 45 then print "VALID AGE", otherwise print "INVALID AGE". NOTE : you should keep asking the user to enter a valid age until she/he enters it.
+	PrintResult(ReadUntilAgeBetween(18, 45));
+
+	// Problem #26 : Write a program to print numbers from 1 to N. INPUT : 10 | OUTPUTS : 1 2 3 ... 10.
+	int Number = ReadNumber();
+	PrintNumberFrom1ToN_UsingWhile(Number);
+	PrintNumberFrom1ToN_UsingDoWhile(Number);
+	PrintNumberFrom1ToN_UsingFor(Number);
+
+	// Problem #27 : Write a program to print numbers from N to 1. INPUT : 10 | OUTPUTS : 10 ... 3 2 1.
+	Number = ReadNumber();
+	PrintNumberFromNTo1_UsingWhile(Number);
+	PrintNumberFromNTo1_UsingDoWhile(Number);
+	PrintNumberFromNTo1_UsingFor(Number);
+
+	// Problem #28 : Write a program to SUM ODD numbers from 1 to N. INPUT : 10 | OUTPUTS : 25.
+	Number = ReadNumber();
+	cout << SumOddNumberFrom1ToN_UsingWhile(Number) << endl;
+	cout << SumOddNumberFrom1ToN_UsingDoWhile(Number) << endl;
+	cout << SumOddNumberFrom1ToN_UsingFor(Number) << endl;
+
+	// Problem #29 : Write a program to SUM EVEN numbers from 1 to N. INPUT : 10 | OUTPUTS : 30.
+	Number = ReadNumber();
+	cout << SumEvenNumberFrom1ToN_UsingWhile(Number) << endl;
+	cout << SumEvenNumberFrom1ToN_UsingDoWhile(Number) << endl;
+	cout << SumEvenNumberFrom1ToN_UsingFor(Number) << endl;
+
+	// Problem #30 : Write a program to calculate FACTORIAL of N. Example FACTORIAL of 6 : 6 * 5 * 4 * 3 * 2 * 1 = 720.
+	// NOTE : user should only enter positive number, otherwise reject it and ask to enter positive number again. INPUT : 6 | OUTPUTS : 720.
+	cout << FactorialOfN(ReadPositiveNumber("\nEnter N : ")) << endl;
+
+	return 0;
+}
