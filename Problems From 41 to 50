@@ -1,0 +1,335 @@
+#include <iostream>;
+using namespace std;
+
+
+// Problem #41 : Write a program to read a NUMBER OF HOURS and calculates the number of WEEKS and DAYS included in that number. INPUTS : 365 | OUTPUTS : 2,17 WEEKS, 15,20 DAYS.
+// Problem #42 : Write a program to calculate the TASK DURATION in SECONDS and print it on the screen. Given the time duration of a task in the number of DAYS, HOURS, MINUTES and SECONDS. INPUTS : 2, 5, 45, 35 | OUTPUTS : 193,535 SECONDS.
+// Problem #43 : Write a program that inputs the NUMBER OF SECONDS and changes it ot DAYS, HOURS, MINUTES and SECONDS. INPUTS : 193,535 | OUPUTS : 2:5:45:35.
+// Problem #44 : Write a program to ask the user to enter : DAY, Then print the day as follow : 1 Print SUNDAY | 2 Print MONDAY | 3 Print TUESDAY | 4 Print WEDNESDAY | 5 Print THURSDAY | 6 Print FRIDAY | 7 Print SATURDAY | Otherwise Print 'WRONG DAY' and ask the user to enter the day again. INPUT : 6 | OUTPUT : It's FRIDAY.
+// Problem #45 : Write a program to ask the user to enter : MONTH, Then print the month as follow : 1 Print JANUARY | 2 Print FEBRUARY | 3 Print MARCH | 4 Print APRIL | 5 Print MAY | 6 Print JUNE | 7 Print JULY | 8 Print AUGUST | 9 Print SEPTEMBER | 10 Print OCTOBER | 11 Print NOVEMBER | 12 Print DECEMBER | Otherwise Print WRONG MONTH and ask the user to enter the month again. INPUT : 11 | OUTPUT : It's NOVEMBER.
+// Problem #46 : Write a program to print all LETTERS from A to Z. OUTPUTS : A, B, C, ... Z.
+// Problem #47 : Write a program to read a LOAN AMOUNT and MONTHLY PAYMENT and calculate how many months you need to settle the loan. INPUTS : 5000£, 500£ | OUTPUT : 10 MONTHS.
+// Problem #48 : Write a program to read a LOAN AMOUNT and ask the user how many months he need to settle the LOAN, then calculate the monthly installment amount. INPUTS : 5000£, 10 | OUTPUT : 500£.
+// Problem #49 : Write a program to read the ATM PIN code from the user, then check if PIN code = 1234, if correct show the balance to the user, otherwise print 'Wrong PIN' and ask the user to enter correct PIN again. INPUTS : 12345 | OUTPUTS : Your balance is : 7500£.
+// Problem #50 : Write a program to read the ATM PIN code from the user, then check if PIN code = 1234, if correct show the balance to the user, otherwise print 'Wrong PIN' and ask the user to enter correct PIN again. NOTE : Only allow the user to enter the PIN 3 times, if fails print 'Card is locked!'. INPUTS : 12345 | OUTPUTS : Your balance is : 7500£.
+
+
+float ReadNumberOfHours()
+{
+	int Hours = 0;
+
+	cout << "Enter number of hours : ";
+	cin >> Hours;
+
+	return Hours;
+}
+float HoursToDays(float Hours)
+{
+	float Days = Hours / 24;
+	return Days;
+}
+float HoursToWeeks(float Hours)
+{
+	//float Weeks = Hours / (24 * 7);
+	float Weeks = Hours / 24 / 7;
+	return Weeks;
+}
+float DaysToWeeks(float Days)
+{
+	float Weeks = Days / 7;
+	return Weeks;
+}
+
+
+struct stTaskDuration
+{
+	short Day = 0;
+	short Hour = 0;
+	short Minute = 0;
+	short Second = 0;
+};
+stTaskDuration ReadTaskDuration()
+{
+	stTaskDuration TaskDuration;
+
+	cout << "\nEnter number of days : ";
+	cin >> TaskDuration.Day;
+
+	cout << "Enter number of Hours : ";
+	cin >> TaskDuration.Hour;
+
+	cout << "Enter number of Minutes : ";
+	cin >> TaskDuration.Minute;
+
+	cout << "Enter number of Seconds : ";
+	cin >> TaskDuration.Second;
+
+	return TaskDuration;
+}
+float TaskDurationInSecond(stTaskDuration TaskDuration)
+{
+	float DurationInSeconds = 0;
+
+	DurationInSeconds = TaskDuration.Day * 24 * 60 * 60;
+	DurationInSeconds += TaskDuration.Hour * 60 * 60;
+	DurationInSeconds += TaskDuration.Minute * 60;
+	DurationInSeconds += TaskDuration.Second;
+
+	return DurationInSeconds;
+}
+void PrintTaskDurationOnSecond(float TaskDurationOnSecond)
+{
+	cout << "Task duration in seconds : " << TaskDurationOnSecond << " second." << endl;
+}
+
+
+int ReadNumberOfSecond()
+{
+	int NumberOfSecond = 0;
+
+	cout << "\nEnter number of seconds : ";
+	cin >> NumberOfSecond;
+
+	return NumberOfSecond;
+}
+stTaskDuration SecondsToTaskDuration(int NumberOfSecond)
+{
+	stTaskDuration TaskDuraiton;
+
+	const int SecondPerDay = 24 * 60 * 60;
+	const int SecondPerHour = 60 * 60;
+	const int SecondPerMinute = 60;
+	int Remainder = 0;
+
+	TaskDuraiton.Day = floor(NumberOfSecond / SecondPerDay);
+	Remainder = NumberOfSecond % SecondPerDay;
+
+	TaskDuraiton.Hour = floor(Remainder / SecondPerHour);
+	Remainder = Remainder % SecondPerHour;
+
+	TaskDuraiton.Minute = floor(Remainder / SecondPerMinute);
+	Remainder = Remainder % SecondPerMinute;
+
+	TaskDuraiton.Second = Remainder;
+
+	return TaskDuraiton;
+}
+void PrintTaskDurationDetails(stTaskDuration TaskDuration)
+{
+	cout << TaskDuration.Day << ":" << TaskDuration.Hour << ":" << TaskDuration.Minute << ":" << TaskDuration.Second << endl;
+}
+
+
+enum enDaysOfWeek {Sat = 1, Sun = 2, Mon = 3, Tue = 4, Wed = 5, Thu = 6, Fri = 7};
+short ReadDayInRange(string Message, short From, short To)
+{
+	short Day = -1;
+
+	while (Day < From || Day > To)
+	{
+		cout << Message;
+		cin >> Day;
+	}
+	
+	return Day;
+}
+enDaysOfWeek ReadDayOfWeek()
+{
+	return (enDaysOfWeek)ReadDayInRange("\nEnter day [Sat = 1, Sun = 2, Mon = 3, Tue = 4, Wed = 5, Thu = 6, Fri = 7] : ", 1, 7);
+}
+string GetDayOfWeek(enDaysOfWeek Day)
+{
+	switch (Day)
+	{
+	case enDaysOfWeek::Sun:
+		return "Sunday";
+	case enDaysOfWeek::Mon:
+		return "Monday";
+	case enDaysOfWeek::Tue:
+		return "Tuesday";
+	case enDaysOfWeek::Wed:
+		return "Wednesday";
+	case enDaysOfWeek::Thu:
+		return "Thursday";
+	case enDaysOfWeek::Fri:
+		return "Friday";
+	case enDaysOfWeek::Sat:
+		return "Saturday";
+	}
+}
+
+
+enum enMonthsOfYear { Jan = 1, Feb = 2, Mar = 3, Apr = 4, May = 5, Jun = 6, Jul = 7, Aug = 8, Sep = 9, Oct = 10, Nov = 11, Dec = 12};
+short ReadMonthInRange(string Message, short From, short To)
+{
+	short Month = -1;
+
+	while (Month < From || Month > To)
+	{
+		cout << Message;
+		cin >> Month;
+	}
+
+	return Month;
+}
+enMonthsOfYear ReadMonthOfYear()
+{
+	return (enMonthsOfYear)ReadMonthInRange("\nEnter month [Jan = 1, Feb = 2, Mar = 3, Apr = 4, May = 5, Jun = 6, Jul = 7, Aug = 8, Sep = 9, Oct = 10, Nov = 11, Dec = 12] : ", 1, 12);
+}
+string GetMonthOfYear(enMonthsOfYear Month)
+{
+	switch (Month)
+	{
+	case enMonthsOfYear::Jan:
+		return "January";
+	case enMonthsOfYear::Feb:
+		return "February";
+	case enMonthsOfYear::Mar:
+		return "March";
+	case enMonthsOfYear::Apr:
+		return "April";
+	case enMonthsOfYear::May:
+		return "May";
+	case enMonthsOfYear::Jun:
+		return "June";
+	case enMonthsOfYear::Jul:
+		return "July";
+	case enMonthsOfYear::Aug:
+		return "Augest";
+	case enMonthsOfYear::Sep:
+		return "September";
+	case enMonthsOfYear::Oct:
+		return "October";
+	case enMonthsOfYear::Nov:
+		return "November";
+	case enMonthsOfYear::Dec:
+		return "December";
+	}
+}
+
+
+void PrintLettersFromAtoZ()
+{
+	cout << "\nAll letters from A to Z : " << endl;
+
+	for (char i = 65; i <= 90; i++)
+	{
+		cout << i << " ";
+	}
+}
+
+
+float ReadPositiveNumber(string Message)
+{
+	float Number;
+
+	do
+	{
+		cout << Message;
+		cin >> Number;
+	} while (Number <= 0);
+
+	return Number;
+}
+float TotalMonths(float LoanAmount, float MonthlyPayment)
+{
+	return LoanAmount / MonthlyPayment;
+}
+
+
+float MonthlyInstallment(float LoanAmount, short NumberOfMonths)
+{
+	return (float)LoanAmount / NumberOfMonths;
+}
+
+
+string ReadPINCode()
+{
+	string PINCode = "";
+
+	cout << "\nEnter your PIN code : ";
+	cin >> PINCode;
+
+	return PINCode;
+}
+bool Login()
+{
+	string PINCode;
+	short Counter = 3;
+
+	do
+	{
+		PINCode = ReadPINCode();
+		Counter--;
+
+		if (PINCode == "1234")
+			return true;
+		else
+		{
+			cout << "Wrong code, You have " << Counter << " more try again" << endl;
+			system("color 4F");
+		}
+		
+	} while (PINCode != "1234" && Counter >= 1);
+
+	return false;
+}
+
+
+int main()
+{
+	// Problem #41 : Write a program to read a NUMBER OF HOURS and calculates the number of WEEKS and DAYS included in that number. INPUTS : 365 | OUTPUTS : 2,17 WEEKS, 15,20 DAYS.
+	float NumberOfHours = ReadNumberOfHours();
+	float NumberOfDays = HoursToDays(NumberOfHours);
+	float NumberOfWeeks = HoursToWeeks(NumberOfHours);
+
+	cout << "Hours to days : " << HoursToDays(NumberOfHours) << endl;
+	cout << "Hours to weeks : " << HoursToWeeks(NumberOfHours) << endl;
+	cout << "Days to weeks : " << DaysToWeeks(NumberOfDays) << endl;
+
+  // Problem #42 : Write a program to calculate the TASK DURATION in SECONDS and print it on the screen. Given the time duration of a task in the number of DAYS, HOURS, MINUTES and SECONDS. INPUTS : 2, 5, 45, 35 | OUTPUTS : 193,535 SECONDS.
+	PrintTaskDurationOnSecond(TaskDurationInSecond(ReadTaskDuration()));
+
+  // Problem #43 : Write a program that inputs the NUMBER OF SECONDS and changes it ot DAYS, HOURS, MINUTES and SECONDS. INPUTS : 193,535 | OUPUTS : 2:5:45:35.
+	int NumberOfSeconds = ReadNumberOfSecond();
+	PrintTaskDurationDetails(SecondsToTaskDuration(NumberOfSeconds));
+
+	// Problem #44 : Write a program to ask the user to enter : DAY, Then print the day as follow : 1 Print SUNDAY | 2 Print MONDAY | 3 Print TUESDAY | 4 Print WEDNESDAY | 5 Print THURSDAY | 6 Print FRIDAY | 7 Print SATURDAY | Otherwise Print 'WRONG DAY' and ask the user to enter the day again. INPUT : 6 | OUTPUT : It's FRIDAY.
+	cout << GetDayOfWeek(ReadDayOfWeek()) << endl;
+
+  // Problem #45 : Write a program to ask the user to enter : MONTH, Then print the month as follow : 1 Print JANUARY | 2 Print FEBRUARY | 3 Print MARCH | 4 Print APRIL | 5 Print MAY | 6 Print JUNE | 7 Print JULY | 8 Print AUGUST | 9 Print SEPTEMBER | 10 Print OCTOBER | 11 Print NOVEMBER | 12 Print DECEMBER | Otherwise Print WRONG MONTH and ask the user to enter the month again. INPUT : 11 | OUTPUT : It's NOVEMBER.
+	cout << GetMonthOfYear(ReadMonthOfYear()) << endl;
+
+  // Problem #46 : Write a program to print all LETTERS from A to Z. OUTPUTS : A, B, C, ... Z.
+	PrintLettersFromAtoZ();
+
+  // Problem #47 : Write a program to read a LOAN AMOUNT and MONTHLY PAYMENT and calculate how many months you need to settle the loan. INPUTS : 5000£, 500£ | OUTPUT : 10 MONTHS.
+	float LoanAmount = ReadPositiveNumber("\n\nEnter loan amount : ");
+	float MonthlyPayment = ReadPositiveNumber("Enter monthly payment : ");
+
+	cout << "Total months to pay : " << TotalMonths(LoanAmount, MonthlyPayment) << endl;
+
+	// Problem #48 : Write a program to read a LOAN AMOUNT and ask the user how many months he need to settle the LOAN, then calculate the monthly installment amount. INPUTS : 5000£, 10 | OUTPUT : 500£.
+	LoanAmount = ReadPositiveNumber("\nEnter loan amount : ");
+	short NumberOfMonths = ReadPositiveNumber("How many month you need for loan amount : ");
+
+	cout << "Monthly installment : " << MonthlyInstallment(LoanAmount, NumberOfMonths) << endl;
+
+  // Problem #49 : Write a program to read the ATM PIN code from the user, then check if PIN code = 1234, if correct show the balance to the user, otherwise print 'Wrong PIN' and ask the user to enter correct PIN again. INPUTS : 12345 | OUTPUTS : Your balance is : 7500£.
+	if (Login())
+	{
+		system("color 2F");
+		cout << "Your account balance is : " << 7500 << endl;
+	}
+
+  // Problem #50 : Write a program to read the ATM PIN code from the user, then check if PIN code = 1234, if correct show the balance to the user, otherwise print 'Wrong PIN' and ask the user to enter correct PIN again. NOTE : Only allow the user to enter the PIN 3 times, if fails print 'Card is locked!'. INPUTS : 12345 | OUTPUTS : Your balance is : 7500£.
+	if (Login())
+	{
+		system("color 2F");
+		cout << "Your account balance is : " << 7500 << endl;
+	}
+	else
+		cout << "Your card blocked call the banck for help!" << endl;
+
+	return 0;
+}
